@@ -11,17 +11,16 @@ body {
     align-items: center;
     background-color: powderblue;
     font-family: sans-serif;
-
 }
 
 /*Book styles*/
 .book {
     position: relative;
-    width: 350px;
-    height: 500px;
+    width: 400px;
+    height: 650px;
     transition: transform 0.5s; 
 }
-.paper{
+.paper {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -30,7 +29,7 @@ body {
     perspective: 1500px;
 }
 .front,
-.back{
+.back {
     background-color: white;
     position: absolute;
     width: 100%;
@@ -39,19 +38,20 @@ body {
     left: 0; 
     transform-origin: left;
     transition: transform 0.5s;
-
+   
 }
-.front{
+.front {
     z-index: 1;
     backface-visibility: hidden;
     border-left: 3px solid powderblue;
 }
-.back{
+.back {
     z-index: 0;
+
 }
 
 .front-content,
-.back-content{
+.back-content {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -59,13 +59,27 @@ body {
     justify-content: center;
     align-items: center;
 }
-.back-content{
+.back-content {
     transform: rotateY(180deg);
+
+}
+
+.back-content img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+
+}
+
+.front-content img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
 }
 
 /*Paper flip effect*/
 .flipped .front, 
-.flipped .back{
+.flipped .back {
     transform: rotateY(-180deg);
 }
 
@@ -94,12 +108,14 @@ i {
 
 /*Paper stack order*/
 #p1 {
-    z-index: 3;
+    z-index: 4;
 }
 #p2 {
-    z-index: 2;
+    z-index: 3;
 }
 #p3 {
+    z-index: 2;
+}
+#p4 {
     z-index: 1;
 }
-
