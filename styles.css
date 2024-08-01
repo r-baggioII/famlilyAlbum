@@ -9,16 +9,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: powderblue;
-    font-family: sans-serif;
+    background-color:#F1DABF;
+    background-image: url('body-texture2.png'); /* Add your texture image here */
+    background-size: cover; /* Adjust the background image to cover the entire area */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-attachment: fixed; /* Ensure the background stays fixed when scrolling */
+    font-family: 'Roboto', sans-serif;
 }
 
 /*Book styles*/
 .book {
     position: relative;
-    width: 400px;
-    height: 650px;
+    width: 500px;
+    height: 500px;
     transition: transform 0.5s; 
+    perspective: 2000px;
+    perspective-origin: left center;
+    transition: transform 0.6s cubic-bezier(0.42, 0, 0.58, 1);
 }
 .paper {
     position: absolute;
@@ -26,11 +33,25 @@ body {
     height: 100%;
     top: 0;
     left: 0; 
-    perspective: 1500px;
+    perspective: 2000px;
+    transform-style: preserve-3d;
 }
+
+.cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.backCover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .front,
 .back {
-    background-color: white;
+    background-color: #F1DABF;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -38,16 +59,20 @@ body {
     left: 0; 
     transform-origin: left;
     transition: transform 0.5s;
-   
+    box-shadow: 0 4px 8px rgba(67, 67, 67, 0.3);
+    background: linear-gradient(to bottom, #F1DABF, #F7E6D0);
+    transform-style: preserve-3d;
+    transform: rotateY(0deg) translateZ(0);
+    transition: transform 0.5s, box-shadow 0.5s;
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 .front {
     z-index: 1;
     backface-visibility: hidden;
-    border-left: 3px solid powderblue;
+    border-left: 0px solid #F1DABF;
 }
 .back {
     z-index: 0;
-
 }
 
 .front-content,
@@ -61,20 +86,25 @@ body {
 }
 .back-content {
     transform: rotateY(180deg);
-
 }
 
 .back-content img {
     max-width: 90%;
     max-height: 90%;
     object-fit: contain;
-
 }
 
 .front-content img {
     max-width: 90%;
     max-height: 90%;
     object-fit: contain;
+}
+
+/* Specific style for the cover image to occupy full dimensions */
+.front-content img.cover-image {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important;
 }
 
 /*Paper flip effect*/
@@ -98,24 +128,45 @@ button:focus {
 }
 
 button:hover {
-    color: gray;
+    color: #362417;
 }
 
 i {
     font-size: 100px;
-    color: gray;
+    color: #362417;
 }
 
 /*Paper stack order*/
 #p1 {
-    z-index: 4;
+    z-index: 11;
 }
 #p2 {
-    z-index: 3;
+    z-index: 10;
 }
 #p3 {
-    z-index: 2;
+    z-index: 9;
 }
 #p4 {
+    z-index: 8;
+}
+#p5 {
+    z-index: 7;
+}
+#p6 {
+    z-index: 6;
+}
+#p7 {
+    z-index: 5;
+}
+#p8 {
+    z-index: 4;
+}
+#p9 {
+    z-index: 3;
+}
+#p10 {
+    z-index: 2;
+}
+#p11 {
     z-index: 1;
 }
