@@ -1,35 +1,84 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const pages = document.querySelectorAll('.page');
-    const prevButton = document.getElementById('prev-page');
-    const nextButton = document.getElementById('next-page');
-    let currentPage = 0;
+//References to DOM elements 
+const prevBtn = document.querySelector('#prev-btn');
+const nextBtn = document.querySelector('#next-btn');
+const book = document.querySelector('.book');
 
-    const updateBook = () => {
-        pages.forEach((page, index) => {
-            if (index <= currentPage) {
-                page.style.transform = 'rotateY(-180deg)';
-                page.style.zIndex = pages.length - index;
-            } else {
-                page.style.transform = 'rotateY(0)';
-                page.style.zIndex = index;
-            }
-        });
-    };
+const paper1 = document.querySelector('#p1');
+const paper2 = document.querySelector('#p2');
+const paper3 = document.querySelector('#p3');
 
-    prevButton.addEventListener('click', () => {
-        if (currentPage > 0) {
-            currentPage--;
-            updateBook();
+//Event listeners
+prevBtn.addEventListener('click', goPrevPage);
+nextBtn.addEventListener('click', goNextPage);
+
+
+//Logic and variables
+let currentLocation = 1; 
+let numOfPapers = 3; 
+let maxLocation = numOfPapers + 1; 
+
+
+function openBook() {
+
+    book.style.transform = 'translateX(50%)';
+    prevBtn.style.transform = 'translateX(-180px)';
+    nextBtn.style.transform = 'translateX(180px)';
+
+}
+
+function closeBook(isBeginning) {
+    if (isBeginning) {
+        book.style.transform = 'translateX(0%)';
+    } else{
+        book.style.transform = 'translateX(100%)';
+    }
+    prevBtn.style.transform = 'translateX(0px)';
+    nextBtn.style.transform = 'translateX(0px)'
+}
+
+function goNextPage() {
+    if (currentLocation < maxLocation) {
+        switch(currentLocation){
+            case 1:
+                openBook(); 
+                paper1.classList.add('flipped');
+                break;
+            case 2:
+                paper2.classList.add('flipped');
+                break;
+            case 3:
+                paper3.classList.add('flipped');
+                closeBook(false);
+                break; 
+            default:
+                throw new Error('unknown state');     
         }
-    });
+        currentLocation++;
+    }
+}
 
-    nextButton.addEventListener('click', () => {
-        if (currentPage < pages.length - 1) {
-            currentPage++;
-            updateBook();
+function goPrevPage() {
+    if(currentLocation > 1){
+        switch(currentLocation){
+            case 2:
+                closeBook(true);
+                paper1.classList.remove('flipped');
+                paper1.style.zIndex = 3;
+                break;
+            case 3:
+                paper2.classList.remove('flipped');
+                paper1.style.zIndex = 2;
+                break;
+            case 4:
+                openBook();
+                paper3.classList.remove('flipped');
+                paper1.style.zIndex = 1;
+                break;
+            default:
+                throw new Error('unknown state');
         }
-    });
+        currentLocation--;
+    }
+}
 
-    // Initialize the book with the first page
-    updateBook();
-});
+
